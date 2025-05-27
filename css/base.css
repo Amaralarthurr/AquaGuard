@@ -1,0 +1,186 @@
+/* Configuração do Tailwind */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+:root {
+    --electric-blue: #3b82f6;
+    --vibrant-purple: #7c3aed;
+    --vibrant-pink: #ec4899;
+    --vibrant-orange: #f97316;
+    --vibrant-teal: #14b8a6;
+    --lime-green: #84cc16;
+    --aqua-blue: #0891b2;
+    --aqua-dark: #0e7490;
+    --aqua-light: #67e8f9;
+    --safe-green: #059669;
+    --danger-red: #dc2626;
+}
+
+* {
+    font-family: 'Inter', sans-serif;
+}
+
+html{
+  scroll-behavior: smooth;
+}
+
+.gradient-bg {
+    background: linear-gradient(-45deg, var(--electric-blue), var(--vibrant-purple), var(--vibrant-pink), var(--vibrant-orange), var(--vibrant-teal));
+    background-size: 400% 400%;
+    animation: gradient 8s ease infinite;
+}
+
+.video-overlay {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.8), rgba(139, 92, 246, 0.6), rgba(236, 72, 153, 0.7));
+}
+
+.glass-effect {
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.neon-glow {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.5), 0 0 40px rgba(139, 92, 246, 0.3);
+}
+
+.card-hover {
+    transition: all 0.3s ease;
+}
+
+.card-hover:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Animações */
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+}
+
+@keyframes gradient {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+@keyframes pulse-slow {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+@keyframes bounce-slow {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-25%); }
+}
+
+.animate-float {
+    animation: float 6s ease-in-out infinite;
+}
+
+.animate-pulse-slow {
+    animation: pulse-slow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.animate-bounce-slow {
+    animation: bounce-slow 3s infinite;
+}
+
+/* Cores customizadas */
+.text-electric-blue { color: var(--electric-blue); }
+.text-vibrant-purple { color: var(--vibrant-purple); }
+.text-vibrant-pink { color: var(--vibrant-pink); }
+.text-vibrant-orange { color: var(--vibrant-orange); }
+.text-vibrant-teal { color: var(--vibrant-teal); }
+.text-lime-green { color: var(--lime-green); }
+.text-aqua-light { color: var(--aqua-light); }
+.text-safe-green { color: var(--safe-green); }
+.text-danger-red { color: var(--danger-red); }
+
+/* Estilos para o mapa */
+.leaflet-container {
+    border-radius: 1rem;
+}
+
+/* Estilos para o gráfico */
+#precipitationChart {
+    max-height: 256px;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .glass-effect {
+        padding: 2rem;
+    }
+    
+    .neon-glow {
+        box-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
+    }
+}
+
+/* Estilos para navegação suave */
+
+/* Classe para links ativos */
+.nav-active {
+    color: var(--electric-blue) !important;
+    font-weight: 700;
+    transform: scale(1.05);
+    text-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+}
+
+/* Highlight de seção */
+.section-highlight {
+    animation: sectionPulse 2s ease-in-out;
+}
+
+@keyframes sectionPulse {
+    0%, 100% { 
+        box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4);
+    }
+    50% { 
+        box-shadow: 0 0 0 20px rgba(59, 130, 246, 0);
+    }
+}
+
+/* Botão voltar ao topo */
+#back-to-top {
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+#back-to-top:hover {
+    box-shadow: 0 0 30px rgba(59, 130, 246, 0.6);
+}
+
+/* Offset para navegação fixa */
+section[id] {
+    scroll-margin-top: 80px;
+}
+
+/* Indicador de progresso de scroll */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--electric-blue), var(--vibrant-purple), var(--vibrant-pink));
+    z-index: 9999;
+    transition: width 0.3s ease;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .nav-active {
+        transform: scale(1.02);
+    }
+    
+    section[id] {
+        scroll-margin-top: 70px;
+    }
+    
+    #back-to-top {
+        bottom: 20px;
+        right: 20px;
+        padding: 12px;
+    }
+}

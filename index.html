@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AquaGuard - Prevenção Inteligente de Enchentes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Chart.js para gráficos -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Leaflet para mapas -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/navigation.css">
+</head>
+<body class="bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 min-h-screen">
+    <!-- Barra de progresso de scroll -->
+    <div class="scroll-progress" id="scroll-progress"></div>
+    
+    <!-- Navigation -->
+    <nav class="bg-white/90 backdrop-blur-md shadow-xl sticky top-0 z-50 border-b-4 border-gradient-to-r from-electric-blue to-vibrant-purple">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <div class="bg-gradient-to-r from-electric-blue to-vibrant-purple p-2 rounded-xl">
+                            <i class="fas fa-shield-alt text-white text-2xl"></i>
+                        </div>
+                        <div class="ml-3">
+                            <span class="text-2xl font-bold bg-gradient-to-r from-electric-blue to-vibrant-purple bg-clip-text text-transparent">AquaGuard</span>
+                            <p class="text-xs text-gray-600 font-medium">Prevenção Inteligente</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="text-gray-700 hover:text-electric-blue transition-all duration-300 font-medium hover:scale-105">Início</a>
+                    <a href="#dashboard" class="text-gray-700 hover:text-vibrant-purple transition-all duration-300 font-medium hover:scale-105">Dashboard</a>
+                    <a href="#community" class="text-gray-700 hover:text-vibrant-pink transition-all duration-300 font-medium hover:scale-105">Comunidade</a>
+                    <a href="#gamification" class="text-gray-700 hover:text-vibrant-orange transition-all duration-300 font-medium hover:scale-105">Ranking</a>
+                    <a href="#about" class="text-gray-700 hover:text-vibrant-teal transition-all duration-300 font-medium hover:scale-105">Sobre</a>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <div class="bg-gradient-to-r from-lime-green to-vibrant-teal px-3 py-1 rounded-full text-white font-bold text-sm">
+                        <i class="fas fa-star mr-1"></i><span id="user-points">2,450</span> pts
+                    </div>
+                    <div class="bg-gradient-to-r from-vibrant-orange to-vibrant-pink px-3 py-1 rounded-full text-white font-bold text-sm">
+                        Nível 5
+                    </div>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-700">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white/95 backdrop-blur-md border-t">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="#home" class="block px-3 py-2 text-gray-700 hover:text-electric-blue font-medium">Início</a>
+                <a href="#dashboard" class="block px-3 py-2 text-gray-700 hover:text-vibrant-purple font-medium">Dashboard</a>
+                <a href="#community" class="block px-3 py-2 text-gray-700 hover:text-vibrant-pink font-medium">Comunidade</a>
+                <a href="#gamification" class="block px-3 py-2 text-gray-700 hover:text-vibrant-orange font-medium">Ranking</a>
+                <a href="#about" class="block px-3 py-2 text-gray-700 hover:text-vibrant-teal font-medium">Sobre</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section with Video Background -->
+    <section id="home" class="relative overflow-hidden min-h-screen flex items-center">
+        <!-- Video Background -->
+        <video autoplay muted loop class="absolute inset-0 w-full h-full object-cover z-0">
+            <source src="./videos/enchente_home_bg.mp4" type="video/mp4">
+            <!-- Fallback for browsers that don't support video -->
+        </video>
+        
+        <!-- Video Overlay -->
+        <div class="absolute inset-0 video-overlay z-10"></div>
+        
+        <!-- Content -->
+        <div class="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
+            <div class="glass-effect rounded-3xl p-12 neon-glow">
+                <h1 class="text-5xl md:text-7xl font-bold text-white mb-6">
+                    <span class="bg-gradient-to-r from-aqua-light via-lime-green to-vibrant-teal bg-clip-text text-transparent">AquaGuard</span><br>
+                    <span class="text-4xl md:text-5xl">Prevenção Inteligente</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-white/90 mb-8 max-w-4xl mx-auto leading-relaxed">
+                    Proteja sua comunidade com tecnologia avançada. Colete dados, monitore riscos e ganhe recompensas por ajudar a prevenir desastres naturais!
+                </p>
+                <div class="flex flex-col sm:flex-row gap-6 justify-center">
+                    <button onclick="scrollToSection('dashboard')" class="bg-gradient-to-r from-electric-blue via-vibrant-purple to-vibrant-pink text-white px-10 py-4 rounded-2xl font-bold text-lg hover:scale-110 transition-all duration-300 neon-glow">
+                        <i class="fas fa-rocket mr-2"></i>Ver Dashboard
+                    </button>
+                    <button onclick="scrollToSection('community')" class="glass-effect text-white px-10 py-4 rounded-2xl font-bold text-lg hover:scale-110 transition-all duration-300 border-2 border-white/30">
+                        <i class="fas fa-users mr-2"></i>Participar da Comunidade
+                    </button>
+                </div>
+                
+                <!-- Floating Stats -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12">
+                    <div class="glass-effect p-4 rounded-xl text-center">
+                        <div class="text-2xl font-bold text-lime-green" id="active-users">1,247</div>
+                        <div class="text-white/80 text-sm">Usuários Ativos</div>
+                    </div>
+                    <div class="glass-effect p-4 rounded-xl text-center">
+                        <div class="text-2xl font-bold text-vibrant-orange" id="reports-today">89</div>
+                        <div class="text-white/80 text-sm">Relatos Hoje</div>
+                    </div>
+                    <div class="glass-effect p-4 rounded-xl text-center">
+                        <div class="text-2xl font-bold text-vibrant-pink">12</div>
+                        <div class="text-white/80 text-sm">Áreas Monitoradas</div>
+                    </div>
+                    <div class="glass-effect p-4 rounded-xl text-center">
+                        <div class="text-2xl font-bold text-aqua-light" id="rain-today">45mm</div>
+                        <div class="text-white/80 text-sm">Chuva Hoje</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Floating elements -->
+        <div class="absolute top-20 left-10 animate-float z-30">
+            <i class="fas fa-cloud-rain text-aqua-light text-6xl opacity-30"></i>
+        </div>
+        <div class="absolute top-40 right-20 animate-bounce-slow z-30">
+            <i class="fas fa-home text-vibrant-orange text-5xl opacity-30"></i>
+        </div>
+        <div class="absolute bottom-20 left-1/4 animate-pulse-slow z-30">
+            <i class="fas fa-users text-lime-green text-5xl opacity-30"></i>
+        </div>
+        <div class="absolute top-1/2 right-10 animate-float z-30" style="animation-delay: 2s;">
+            <i class="fas fa-shield-alt text-vibrant-purple text-4xl opacity-30"></i>
+        </div>
+    </section>
+
+    <!-- Dashboard Section -->
+    <section id="dashboard" class="py-20 gradient-bg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl md:text-6xl font-bold text-white mb-6">
+                    Dashboard em Tempo Real
+                </h2>
+                <p class="text-xl text-white/90 max-w-3xl mx-auto">
+                    Monitore dados de chuva, áreas de risco e relatos da comunidade com nossa tecnologia de ponta!
+                </p>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                <div class="bg-gradient-to-br from-electric-blue via-blue-500 to-aqua-blue p-8 rounded-3xl text-white card-hover neon-glow">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-blue-100 text-lg font-medium">Precipitação Hoje</p>
+                            <p class="text-4xl font-bold" id="precipitation-stat">45mm</p>
+                            <p class="text-blue-200 text-sm">+15% vs ontem</p>
+                        </div>
+                        <i class="fas fa-cloud-rain text-5xl text-blue-200 animate-bounce-slow"></i>
+                    </div>
+                </div>
+                
+                <div class="bg-gradient-to-br from-vibrant-orange via-red-500 to-danger-red p-8 rounded-3xl text-white card-hover neon-glow">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-orange-100 text-lg font-medium">Áreas de Risco</p>
+                            <p class="text-4xl font-bold">12</p>
+                            <p class="text-orange-200 text-sm">Monitoradas 24/7</p>
+                        </div>
+                        <i class="fas fa-exclamation-triangle text-5xl text-orange-200 animate-pulse-slow"></i>
+                    </div>
+                </div>
+                
+                <div class="bg-gradient-to-br from-lime-green via-green-500 to-safe-green p-8 rounded-3xl text-white card-hover neon-glow">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-green-100 text-lg font-medium">Relatos Hoje</p>
+                            <p class="text-4xl font-bold" id="reports-stat">89</p>
+                            <p class="text-green-200 text-sm">+23% vs ontem</p>
+                        </div>
+                        <i class="fas fa-comments text-5xl text-green-200 animate-float"></i>
+                    </div>
+                </div>
+                
+                <div class="bg-gradient-to-br from-vibrant-purple via-purple-500 to-indigo-600 p-8 rounded-3xl text-white card-hover neon-glow">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-purple-100 text-lg font-medium">Usuários Ativos</p>
+                            <p class="text-4xl font-bold" id="users-stat">1,247</p>
+                            <p class="text-purple-200 text-sm">Comunidade forte!</p>
+                        </div>
+                        <i class="fas fa-users text-5xl text-purple-200 animate-pulse-slow"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts and Maps -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Interactive Chart -->
+                <div class="bg-white/95 backdrop-blur-md p-8 rounded-3xl shadow-2xl">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-2xl font-bold bg-gradient-to-r from-electric-blue to-vibrant-purple bg-clip-text text-transparent">
+                            Precipitação - Últimas 24h
+                        </h3>
+                        <button id="refresh-chart" class="bg-gradient-to-r from-electric-blue to-vibrant-purple text-white px-4 py-2 rounded-lg text-sm hover:scale-105 transition-all">
+                            <i class="fas fa-sync-alt mr-1"></i>Atualizar
+                        </button>
+                    </div>
+                    <div class="h-64 relative">
+                        <canvas id="precipitationChart"></canvas>
+                    </div>
+                    <div class="mt-4 grid grid-cols-3 gap-4 text-center">
+                        <div class="bg-blue-50 p-3 rounded-lg">
+                            <div class="text-lg font-bold text-blue-600" id="chart-max">0mm</div>
+                            <div class="text-xs text-blue-500">Máximo</div>
+                        </div>
+                        <div class="bg-green-50 p-3 rounded-lg">
+                            <div class="text-lg font-bold text-green-600" id="chart-avg">0mm</div>
+                            <div class="text-xs text-green-500">Média</div>
+                        </div>
+                        <div class="bg-purple-50 p-3 rounded-lg">
+                            <div class="text-lg font-bold text-purple-600" id="chart-total">0mm</div>
+                            <div class="text-xs text-purple-500">Total</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Interactive Map -->
+                <div class="bg-white/95 backdrop-blur-md p-8 rounded-3xl shadow-2xl">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-2xl font-bold bg-gradient-to-r from-vibrant-teal to-lime-green bg-clip-text text-transparent">
+                            Mapa de Riscos
+                        </h3>
+                        <div class="flex space-x-2">
+                            <button id="toggle-markers" class="bg-gradient-to-r from-vibrant-teal to-lime-green text-white px-3 py-1 rounded text-sm hover:scale-105 transition-all">
+                                <i class="fas fa-map-marker-alt mr-1"></i>Marcadores
+                            </button>
+                            <button id="center-map" class="bg-gradient-to-r from-vibrant-orange to-vibrant-pink text-white px-3 py-1 rounded text-sm hover:scale-105 transition-all">
+                                <i class="fas fa-crosshairs mr-1"></i>Centralizar
+                            </button>
+                        </div>
+                    </div>
+                    <div id="riskMap" class="h-64 rounded-2xl overflow-hidden border-2 border-gray-200"></div>
+                    <div class="mt-4 flex justify-between text-sm">
+                        <div class="flex items-center">
+                            <div class="w-3 h-3 bg-red-500 rounded-full mr-2"></div>
+                            <span>Alto Risco</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-3 h-3 bg-yellow-500 rounded-full mr-2"></div>
+                            <span>Médio Risco</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-3 h-3 bg-green-500 rounded-full mr-2"></div>
+                            <span>Baixo Risco</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Data Collection -->
+    <section id="community" class="py-20 bg-gradient-to-br from-vibrant-pink via-purple-600 to-indigo-800">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl md:text-6xl font-bold text-white mb-6">
+                    Contribua com a Comunidade
+                </h2>
+                <p class="text-xl text-white/90 max-w-3xl mx-auto">
+                    Seus dados ajudam a proteger vidas! Compartilhe informações sobre sua região e ganhe recompensas incríveis!
+                </p>
+            </div>
+
+            <!-- LGPD Consent -->
+            <div class="bg-white/95 backdrop-blur-md rounded-3xl p-8 mb-8 shadow-2xl">
+                <div class="flex items-start space-x-4 mb-6">
+                    <div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3 bg-gradient-to-r from-safe-green to-vibrant-teal bg-clip-text text-transparent">
+                            🔒 Proteção de Dados - LGPD
+                        </h3>
+                        <p class="text-gray-700 mb-4 text-lg">
+                            Respeitamos sua privacidade! Os dados coletados serão utilizados exclusivamente para:
+                        </p>
+                        <ul class="list-none space-y-2 mb-6">
+                            <li class="flex items-center text-gray-700"><i class="fas fa-check-circle text-safe-green mr-3">
+                            </i>🌊 Monitoramento de riscos de enchentes</li>
+
+                            <li class="flex items-center text-gray-700"><i class="fas fa-check-circle text-safe-green mr-3">
+                            </i>📢 Alertas preventivos para a comunidade</li>
+
+                            <li class="flex items-center text-gray-700"><i class="fas fa-check-circle text-safe-green mr-3">
+                            </i>📈 Análise estatística para melhoria do sistema</li>
+
+                            <li class="flex items-center text-gray-700"><i class="fas fa-check-circle text-safe-green mr-3">
+                            </i>🎮 Gamificação e engajamento dos usuários</li>
+                        </ul>
+                        <div class="flex items-center space-x-3 bg-gradient-to-r from-safe-green/10 to-vibrant-teal/10 p-4 rounded-2xl">
+                            <input type="checkbox" id="lgpd-consent" class="w-5 h-5 text-safe-green rounded">
+                            <label for="lgpd-consent" class="text-gray-800 font-medium">
+                                Concordo com o tratamento dos meus dados conforme a LGPD e 
+                                <a href="" class="text-vibrant-teal underline font-bold hover:text-safe-green">Termos de Uso</a>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Data Collection Form -->
+            <div class="bg-white/95 backdrop-blur-md rounded-3xl p-8 shadow-2xl">
+                <div class="text-center mb-8">
+                    <h3 class="text-3xl font-bold bg-gradient-to-r from-vibrant-pink to-vibrant-purple bg-clip-text text-transparent mb-2">
+                        Formulário de Relato
+                    </h3>
+                    <p class="text-gray-600">Ajude sua comunidade compartilhando informações importantes!</p>
+                </div>
+                
+                <form id="community-form" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-lg font-bold text-gray-800 mb-3">
+                                Localização (Bairro/Cidade)
+                            </label>
+                            <input type="text" name="location" class="w-full px-6 py-4 border-2 border-gray-200 rounded-2xl focus:ring-4 focus:ring-vibrant-pink/20 focus:border-vibrant-pink transition-all text-lg" placeholder="Ex: Centro, São Paulo">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-lg font-bold text-gray-800 mb-3">
+                                Faixa Etária
+                            </label>
+                            <select name="age" class="w-full px-6 py-4 border-2 border-gray-200 rounded-2xl focus:ring-4 focus:ring-vibrant-purple/20 focus:border-vibrant-purple transition-all text-lg">
+                                <option>18-25 anos</option>
+                                <option>26-35 anos</option>
+                                <option>36-50 anos</option>
+                                <option>51-65 anos</option>
+                                <option>65+ anos</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-lg font-bold text-gray-800 mb-3">
+                            Tipo de Relato
+                        </label>
+                        <select name="reportType" class="w-full px-6 py-4 border-2 border-gray-200 rounded-2xl focus:ring-4 focus:ring-vibrant-teal/20 focus:border-vibrant-teal transition-all text-lg">
+                            <option>☔ Chuva intensa</option>
+                            <option>🌊 Alagamento</option>
+                            <option>🏞️ Rio/córrego transbordando</option>
+                            <option>⚠️ Área de risco identificada</option>
+                            <option>✅ Situação normalizada</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-lg font-bold text-gray-800 mb-3">
+                            Descrição da Situação
+                        </label>
+                        <textarea name="description" rows="4" class="w-full px-6 py-4 border-2 border-gray-200 rounded-2xl focus:ring-4 focus:ring-lime-green/20 focus:border-lime-green transition-all text-lg" placeholder="Descreva o que você observou..."></textarea>
+                    </div>
+
+                    <div>
+                        <label class="block text-lg font-bold text-gray-800 mb-3">
+                            Foto da Área (Opcional)
+                        </label>
+                        <div class="border-4 border-dashed border-vibrant-orange/50 rounded-2xl p-8 text-center bg-gradient-to-br from-vibrant-orange/5 to-vibrant-pink/5 hover:from-vibrant-orange/10 hover:to-vibrant-pink/10 transition-all cursor-pointer">
+                            <i class="fas fa-camera text-vibrant-orange text-5xl mb-4 animate-bounce-slow"></i>
+                            <p class="text-gray-600 text-lg font-medium">Clique para adicionar uma foto</p>
+                            <p class="text-gray-500">Máximo 5MB - JPG, PNG</p>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="w-full bg-gradient-to-r from-vibrant-pink via-vibrant-purple to-electric-blue text-white py-6 rounded-2xl font-bold text-xl hover:scale-105 transition-all duration-300 neon-glow">
+                        <i class="fas fa-paper-plane mr-3"></i>Enviar Relato (+50 pontos)
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gamification Section -->
+    <section id="gamification" class="py-20 bg-gradient-to-br from-lime-green via-vibrant-teal to-electric-blue">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl md:text-6xl font-bold text-white mb-6">
+                    Sistema de Recompensas
+                </h2>
+                <p class="text-xl text-white/90 max-w-3xl mx-auto">
+                    Ganhe pontos, badges e suba no ranking ajudando sua comunidade! Diversão garantida! 🎮
+                </p>
+            </div>
+
+            <!-- User Profile Card -->
+            <div class="bg-gradient-to-r from-vibrant-purple via-vibrant-pink to-vibrant-orange rounded-3xl p-8 text-white mb-12 shadow-2xl card-hover neon-glow">
+                <div class="flex flex-col md:flex-row items-center justify-between">
+                    <div class="flex items-center space-x-6 mb-6 md:mb-0">
+                        <div class="w-20 h-20 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border-4 border-white/30">
+                            <i class="fas fa-user-shield text-white text-3xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-3xl font-bold">🛡️ Guardião da Comunidade</h3>
+                            <p class="text-white/80 text-lg">Nível 5 • <span id="profile-points">2,450</span> pontos • 🔥 Streak: 15 dias</p>
+                            <div class="flex space-x-2 mt-2">
+                                <span class="bg-white/20 px-3 py-1 rounded-full text-sm">🏅 Expert</span>
+                                <span class="bg-white/20 px-3 py-1 rounded-full text-sm">⚡ Ativo</span>
+                                <span class="bg-white/20 px-3 py-1 rounded-full text-sm">🌟 VIP</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-5xl font-bold">15°</p>
+                        <p class="text-white/80 text-lg">Posição no Ranking</p>
+                        <div class="bg-white/20 px-4 py-2 rounded-full mt-2">
+                            <i class="fas fa-arrow-up text-lime-green mr-1"></i>
+                            <span class="text-sm">+3 posições</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Badges -->
+            <div class="mb-12">
+                <h3 class="text-3xl font-bold text-white mb-8 text-center">🎖️ Suas Conquistas</h3>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+                    <div class="bg-gradient-to-br from-yellow-400 to-orange-500 p-6 rounded-2xl text-center card-hover shadow-xl">
+                        <i class="fas fa-medal text-white text-4xl mb-3"></i>
+                        <p class="text-white font-bold">🥇 Primeiro Relato</p>
+                        <p class="text-yellow-100 text-sm">Conquistado!</p>
+                    </div>
+                    <div class="bg-gradient-to-br from-blue-500 to-purple-600 p-6 rounded-2xl text-center card-hover shadow-xl">
+                        <i class="fas fa-eye text-white text-4xl mb-3"></i>
+                        <p class="text-white font-bold">👁️ Observador</p>
+                        <p class="text-blue-100 text-sm">10 relatos</p>
+                    </div>
+                    <div class="bg-gradient-to-br from-green-500 to-teal-600 p-6 rounded-2xl text-center card-hover shadow-xl">
+                        <i class="fas fa-users text-white text-4xl mb-3"></i>
+                        <p class="text-white font-bold">👥 Mobilizador</p>
+                        <p class="text-green-100 text-sm">5 amigos</p>
+                    </div>
+                    <div class="bg-gradient-to-br from-purple-500 to-pink-600 p-6 rounded-2xl text-center card-hover shadow-xl">
+                        <i class="fas fa-brain text-white text-4xl mb-3"></i>
+                        <p class="text-white font-bold">🧠 Expert Quiz</p>
+                        <p class="text-purple-100 text-sm">100% acertos</p>
+                    </div>
+                    <div class="bg-gradient-to-br from-gray-400 to-gray-600 p-6 rounded-2xl text-center opacity-60">
+                        <i class="fas fa-crown text-white text-4xl mb-3"></i>
+                        <p class="text-white font-bold">👑 Líder Mensal</p>
+                        <p class="text-gray-200 text-sm">Em progresso</p>
+                    </div>
+                    <div class="bg-gradient-to-br from-gray-400 to-gray-600 p-6 rounded-2xl text-center opacity-60">
+                        <i class="fas fa-shield text-white text-4xl mb-3"></i>
+                        <p class="text-white font-bold">🛡️ Protetor</p>
+                        <p class="text-gray-200 text-sm">Bloqueado</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ranking and Quiz -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="bg-white/95 backdrop-blur-md p-8 rounded-3xl shadow-2xl card-hover">
+                    <h3 class="text-2xl font-bold mb-6 bg-gradient-to-r from-vibrant-orange to-vibrant-pink bg-clip-text text-transparent">
+                        🏆 Top 10 da Semana
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between p-4 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-2xl text-white">
+                            <div class="flex items-center space-x-4">
+                                <span class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center text-sm font-bold">🥇</span>
+                                <div>
+                                    <span class="font-bold text-lg">@maria_silva</span>
+                                    <p class="text-yellow-100 text-sm">Nível 8 • Streak: 30 dias</p>
+                                </div>
+                            </div>
+                            <span class="text-white font-bold text-xl">3,250 pts</span>
+                        </div>
+                        <div class="flex items-center justify-between p-4 bg-gradient-to-r from-gray-400 to-gray-600 rounded-2xl text-white">
+                            <div class="flex items-center space-x-4">
+                                <span class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center text-sm font-bold">🥈</span>
+                                <div>
+                                    <span class="font-bold text-lg">@joao_santos</span>
+                                    <p class="text-gray-200 text-sm">Nível 6 • Streak: 12 dias</p>
+                                </div>
+                            </div>
+                            <span class="text-white font-bold text-xl">2,980 pts</span>
+                        </div>
+                        <div class="flex items-center justify-between p-4 bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl text-white">
+                            <div class="flex items-center space-x-4">
+                                <span class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center text-sm font-bold">🥉</span>
+                                <div>
+                                    <span class="font-bold text-lg">@ana_costa</span>
+                                    <p class="text-orange-200 text-sm">Nível 5 • Streak: 8 dias</p>
+                                </div>
+                            </div>
+                            <span class="text-white font-bold text-xl">2,675 pts</span>
+                        </div>
+                        <div class="text-center pt-4">
+                            <button class="bg-gradient-to-r from-vibrant-purple to-electric-blue text-white px-6 py-3 rounded-xl font-bold hover:scale-105 transition-all">
+                                Ver Ranking Completo
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quiz Section -->
+                <div class="bg-gradient-to-br from-vibrant-purple via-purple-600 to-indigo-700 p-8 rounded-3xl text-white shadow-2xl card-hover">
+                    <h3 class="text-2xl font-bold mb-6 flex items-center">
+                        🧠 Quiz Diário <span class="ml-2 bg-white/20 px-2 py-1 rounded-full text-sm">+100 pts</span>
+                    </h3>
+                    <p class="mb-6 text-purple-100 text-lg">Teste seus conhecimentos sobre prevenção de enchentes!</p>
+                    <div class="bg-white/10 backdrop-blur-md p-6 rounded-2xl mb-6 border border-white/20">
+                        <p class="font-bold mb-3 text-lg">🤔 Pergunta do Dia:</p>
+                        <p class="text-purple-100">Qual é a principal causa de enchentes urbanas no Brasil?</p>
+                        <div class="grid grid-cols-1 gap-3 mt-4">
+                            <button class="quiz-option bg-white/10 hover:bg-white/20 p-3 rounded-xl text-left transition-all hover:scale-105" data-correct="true">
+                                A) Falta de drenagem urbana adequada
+                            </button>
+                            <button class="quiz-option bg-white/10 hover:bg-white/20 p-3 rounded-xl text-left transition-all hover:scale-105" data-correct="false">
+                                B) Excesso de chuva apenas
+                            </button>
+                        </div>
+                    </div>
+                    <div class="flex space-x-4">
+                        <button id="quiz-submit" class="flex-1 bg-white text-purple-600 px-6 py-3 rounded-xl font-bold hover:scale-105 transition-all">
+                            🎯 Responder
+                        </button>
+                        <button class="bg-white/20 text-white px-6 py-3 rounded-xl font-bold hover:bg-white/30 transition-all">
+                            💡 Dica
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About & IP Section -->
+    <section id="about" class="py-20 bg-gradient-to-br from-gray-900 via-purple-900 to-indigo-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl md:text-6xl font-bold text-white mb-6">
+                    🚀 Sobre o AquaGuard
+                </h2>
+                <p class="text-xl text-white/80 max-w-3xl mx-auto">
+                    Tecnologia revolucionária a serviço da prevenção de desastres naturais! 🌟
+                </p>
+            </div>
+
+            <!-- Influencer Partnership -->
+            <div class="bg-gradient-to-r from-vibrant-pink via-vibrant-purple to-electric-blue rounded-3xl p-8 text-white shadow-2xl card-hover neon-glow">
+                <div class="text-center">
+                    <h3 class="text-3xl font-bold mb-6">🌟 Parcerias com Influenciadores</h3>
+                    <p class="text-xl mb-8 text-white/90">
+                        Colaboramos com influenciadores locais para amplificar nossa mensagem de prevenção e engajar jovens! 📱
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="text-center">
+                            <div class="w-20 h-20 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center mx-auto mb-4 border-4 border-white/30">
+                                <i class="fas fa-microphone text-3xl animate-pulse-slow"></i>
+                            </div>
+                            <h4 class="font-bold text-xl mb-2">🎙️ Podcasters</h4>
+                            <p class="text-white/80">Educação através de conteúdo envolvente</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-20 h-20 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center mx-auto mb-4 border-4 border-white/30">
+                                <i class="fas fa-video text-3xl animate-bounce-slow"></i>
+                            </div>
+                            <h4 class="font-bold text-xl mb-2">📹 YouTubers</h4>
+                            <p class="text-white/80">Demonstrações práticas e tutoriais</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-20 h-20 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center mx-auto mb-4 border-4 border-white/30">
+                                <i class="fas fa-heart text-3xl animate-pulse-slow"></i>
+                            </div>
+                            <h4 class="font-bold text-xl mb-2">❤️ Ativistas</h4>
+                            <p class="text-white/80">Mobilização e conscientização comunitária</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gradient-to-br from-gray-900 via-black to-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center mb-6">
+                        <div class="bg-gradient-to-r from-electric-blue to-vibrant-purple p-3 rounded-2xl mr-3">
+                            <i class="fas fa-shield-alt text-white text-2xl"></i>
+                        </div>
+                        <div>
+                            <span class="text-2xl font-bold bg-gradient-to-r from-electric-blue to-vibrant-purple bg-clip-text text-transparent">AquaGuard</span>
+                            <p class="text-gray-400 text-sm">Prevenção Inteligente</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 text-lg">
+                        🌊 Protegendo comunidades através da tecnologia e colaboração. Juntos somos mais fortes! 💪
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4 text-xl text-vibrant-teal">🚀 Produto</h4>
+                    <ul class="space-y-3 text-gray-400">
+                        <li><a href="#dashboard" class="hover:text-electric-blue transition-colors text-lg">📊 Dashboard</a></li>
+                        <li><a href="#community" class="hover:text-vibrant-purple transition-colors text-lg">👥 Comunidade</a></li>
+                        <li><a href="#gamification" class="hover:text-vibrant-pink transition-colors text-lg">🏆 Ranking</a></li>
+                        <li><a href="#" class="hover:text-vibrant-orange transition-colors text-lg">🔌 API</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4 text-xl text-lime-green">🆘 Suporte</h4>
+                    <ul class="space-y-3 text-gray-400">
+                        <li><a href="#" class="hover:text-electric-blue transition-colors text-lg">❓ Central de Ajuda</a></li>
+                        <li><a href="#" class="hover:text-vibrant-purple transition-colors text-lg">📞 Contato</a></li>
+                        <li><a href="#" class="hover:text-vibrant-pink transition-colors text-lg">🔒 LGPD</a></li>
+                        <li><a href="#" class="hover:text-vibrant-orange transition-colors text-lg">📋 Termos de Uso</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4 text-xl text-vibrant-pink">🌐 Conecte-se</h4>
+                    <div class="flex space-x-4 mb-4">
+                        <a href="#" class="bg-gradient-to-r from-electric-blue to-vibrant-purple p-3 rounded-xl hover:scale-110 transition-all">
+                            <i class="fab fa-twitter text-xl"></i>
+                        </a>
+                        <a href="#" class="bg-gradient-to-r from-vibrant-pink to-vibrant-orange p-3 rounded-xl hover:scale-110 transition-all">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                        <a href="#" class="bg-gradient-to-r from-electric-blue to-vibrant-teal p-3 rounded-xl hover:scale-110 transition-all">
+                            <i class="fab fa-linkedin text-xl"></i>
+                        </a>
+                        <a href="#" class="bg-gradient-to-r from-vibrant-orange to-danger-red p-3 rounded-xl hover:scale-110 transition-all">
+                            <i class="fab fa-youtube text-xl"></i>
+                        </a>
+                    </div>
+                    <p class="text-gray-400">📧 contato@aquaguard.com.br</p>
+                    <p class="text-gray-400">📱 +55 (11) 9999-9999</p>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center">
+                <p class="text-gray-400 text-lg">
+                    © 2024 AquaGuard Technologies. Todos os direitos reservados. 
+                    <span class="text-vibrant-pink">❤️</span> Desenvolvido para um Brasil mais seguro! 🇧🇷
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="./js/base.js"></script>
+    <script src="./js/mobileMenu.js"></script>
+    <script src="./js/form.js"></script>
+    <script src="./js/cssEffects.js"></script>
+    <script src="./js/dataUpdates.js"></script>
+    <script src="./js/chart.js"></script>
+    <script src="./js/map.js"></script>
+    <script src="./js/quiz.js"></script>
+    <script src="./js/scrollProgress.js"></script>
+    
+</body>
+</html>
