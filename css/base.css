@@ -141,16 +141,6 @@ html{
     }
 }
 
-/* Botão voltar ao topo */
-#back-to-top {
-    backdrop-filter: blur(10px);
-    border: 2px solid rgba(255, 255, 255, 0.2);
-}
-
-#back-to-top:hover {
-    box-shadow: 0 0 30px rgba(59, 130, 246, 0.6);
-}
-
 /* Offset para navegação fixa */
 section[id] {
     scroll-margin-top: 80px;
@@ -177,10 +167,5 @@ section[id] {
     section[id] {
         scroll-margin-top: 70px;
     }
-    
-    #back-to-top {
-        bottom: 20px;
-        right: 20px;
-        padding: 12px;
-    }
+
 }

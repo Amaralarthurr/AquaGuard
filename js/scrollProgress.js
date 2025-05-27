@@ -323,33 +323,6 @@ document.addEventListener('keydown', function(e) {
     }
 });
 
-// Adicionar botão "voltar ao topo" flutuante
-function addBackToTopButton() {
-    const button = document.createElement('button');
-    button.innerHTML = '<i class="fas fa-arrow-up"></i>';
-    button.className = 'fixed bottom-8 right-8 bg-gradient-to-r from-electric-blue to-vibrant-purple text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-all duration-300 z-50 opacity-0 pointer-events-none';
-    button.id = 'back-to-top';
-    button.onclick = scrollToTop;
-    
-    document.body.appendChild(button);
-    
-    // Mostrar/ocultar baseado no scroll
-    window.addEventListener('scroll', function() {
-        if (window.scrollY > 500) {
-            button.style.opacity = '1';
-            button.style.pointerEvents = 'auto';
-        } else {
-            button.style.opacity = '0';
-            button.style.pointerEvents = 'none';
-        }
-    });
-}
-
-// Inicializar botão voltar ao topo
-document.addEventListener('DOMContentLoaded', function() {
-    setTimeout(addBackToTopButton, 1000);
-});
-
 // Exportar funções para uso global
 window.scrollToSection = scrollToSection;
 window.scrollToTop = scrollToTop;
