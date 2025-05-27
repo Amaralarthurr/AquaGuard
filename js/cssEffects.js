@@ -1,4 +1,3 @@
-// Add parallax effect to hero video
 window.addEventListener("scroll", function () {
   const scrolled = window.pageYOffset;
   const video = document.querySelector("video");
@@ -8,7 +7,6 @@ window.addEventListener("scroll", function () {
   }
 });
 
-// Add interactive hover effects
 document.querySelectorAll(".card-hover").forEach((card) => {
   card.addEventListener("mouseenter", function () {
     this.style.transform = "translateY(-10px) scale(1.02)";
@@ -19,7 +17,6 @@ document.querySelectorAll(".card-hover").forEach((card) => {
   });
 });
 
-// Add loading animation for video
 const video = document.querySelector("video");
 if (video) {
   video.addEventListener("loadstart", function () {

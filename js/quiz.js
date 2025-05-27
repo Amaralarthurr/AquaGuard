@@ -1,4 +1,3 @@
-// Sistema de Quiz Interativo sobre Prevenção de Enchentes
 class QuizSystem {
   constructor() {
     this.questions = [
@@ -93,17 +92,13 @@ class QuizSystem {
 
     const question = this.questions[this.currentQuestion]
 
-    // Update progress
     this.updateProgress()
 
-    // Update question content
     document.getElementById("question-number").textContent = this.currentQuestion + 1
     document.getElementById("question-text").textContent = question.question
 
-    // Create options
     this.createOptions(question.options)
 
-    // Reset submit button
     const submitBtn = document.getElementById("quiz-submit")
     if (submitBtn) {
       submitBtn.disabled = true
@@ -133,18 +128,15 @@ class QuizSystem {
   }
 
   selectOption(index, buttonElement) {
-    // Remove selection from all options
     const allOptions = document.querySelectorAll(".quiz-option")
     allOptions.forEach((option) => {
       option.classList.remove("border-white", "bg-white/30")
     })
 
-    // Add selection to clicked option
     buttonElement.classList.add("border-white", "bg-white/30")
 
     this.selectedAnswer = index
 
-    // Enable submit button
     const submitBtn = document.getElementById("quiz-submit")
     if (submitBtn) {
       submitBtn.disabled = false
@@ -157,7 +149,6 @@ class QuizSystem {
     const question = this.questions[this.currentQuestion]
     const isCorrect = this.selectedAnswer === question.correct
 
-    // Store user answer
     this.userAnswers.push({
       question: question.question,
       userAnswer: this.selectedAnswer,
@@ -169,10 +160,8 @@ class QuizSystem {
       this.score++
     }
 
-    // Show feedback
     this.showFeedback(isCorrect, question)
 
-    // Move to next question after delay
     setTimeout(() => {
       this.currentQuestion++
       this.loadQuestion()
@@ -191,7 +180,6 @@ class QuizSystem {
       option.disabled = true
     })
 
-    // Update submit button
     const submitBtn = document.getElementById("quiz-submit")
     if (submitBtn) {
       submitBtn.innerHTML = isCorrect
@@ -207,7 +195,6 @@ class QuizSystem {
 
     if (!hintBtn) return
 
-    // Create hint popup
     const hintDiv = document.createElement("div")
     hintDiv.className = "fixed inset-0 bg-black/50 flex items-center justify-center z-50"
     hintDiv.innerHTML = `
@@ -225,7 +212,6 @@ class QuizSystem {
 
     document.body.appendChild(hintDiv)
 
-    // Remove hint after 10 seconds
     setTimeout(() => {
       if (hintDiv.parentElement) {
         hintDiv.remove()
@@ -250,23 +236,18 @@ class QuizSystem {
   showResults() {
     this.quizCompleted = true
 
-    // Hide question container and controls
     document.getElementById("question-container").classList.add("hidden")
     document.getElementById("quiz-controls").classList.add("hidden")
 
-    // Show result container and restart button
     document.getElementById("result-container").classList.remove("hidden")
     document.getElementById("restart-container").classList.remove("hidden")
 
-    // Calculate results
     const percentage = (this.score / this.questions.length) * 100
     const correctCount = this.score
     const incorrectCount = this.questions.length - this.score
 
-    // Update result content
     this.updateResultContent(percentage, correctCount, incorrectCount)
 
-    // Award points
     this.awardPoints(percentage)
 
     console.log(`🎯 Quiz concluído: ${this.score}/${this.questions.length} (${percentage.toFixed(1)}%)`)
@@ -280,7 +261,6 @@ class QuizSystem {
     const correctCountEl = document.getElementById("correct-count")
     const incorrectCountEl = document.getElementById("incorrect-count")
 
-    // Determine result level
     let emoji, title, message
     if (percentage >= 90) {
       title = "Excelente!"
@@ -311,12 +291,10 @@ class QuizSystem {
     else if (percentage >= 50) points = 50
     else points = 25
 
-    // Assuming updateUserPoints is defined elsewhere or will be defined later
     if (typeof updateUserPoints === "function") {
       updateUserPoints(points)
     }
 
-    // Update quiz points display
     const quizPoints = document.getElementById("quiz-points")
     if (quizPoints) {
       quizPoints.textContent = `+${points} pts`
@@ -326,37 +304,30 @@ class QuizSystem {
   }
 
   restartQuiz() {
-    // Reset quiz state
     this.currentQuestion = 0
     this.score = 0
     this.selectedAnswer = null
     this.quizCompleted = false
     this.userAnswers = []
 
-    // Show question container and controls
     document.getElementById("question-container").classList.remove("hidden")
     document.getElementById("quiz-controls").classList.remove("hidden")
 
-    // Hide result container and restart button
     document.getElementById("result-container").classList.add("hidden")
     document.getElementById("restart-container").classList.add("hidden")
 
-    // Reset quiz points display
     const quizPoints = document.getElementById("quiz-points")
     if (quizPoints) {
       quizPoints.textContent = "+100 pts"
     }
 
-    // Load first question
     this.loadQuestion()
 
     console.log("🔄 Quiz reiniciado")
   }
 }
 
-// Initialize quiz when DOM is loaded
 document.addEventListener("DOMContentLoaded", () => {
-  // Wait a bit to ensure other scripts are loaded
   setTimeout(() => {
     new QuizSystem()
   }, 1000)

@@ -1,10 +1,8 @@
-// Gráfico de Precipitação Interativo
 let precipitationChart;
 
 function initChart() {
     const ctx = document.getElementById('precipitationChart').getContext('2d');
     
-    // Dados simulados das últimas 24 horas
     const hours = [];
     const precipitationData = [];
     
@@ -13,7 +11,6 @@ function initChart() {
         hour.setHours(hour.getHours() - i);
         hours.push(hour.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }));
         
-        // Simular dados de precipitação (0-15mm por hora)
         precipitationData.push(Math.random() * 15);
     }
     
@@ -112,7 +109,6 @@ function refreshChart() {
     
     updateChartStats(newData);
     
-    // Feedback visual
     const button = document.getElementById('refresh-chart');
     const originalText = button.innerHTML;
     button.innerHTML = '<i class="fas fa-check mr-1"></i>Atualizado!';
@@ -124,7 +120,6 @@ function refreshChart() {
     }, 2000);
 }
 
-// Event Listeners
 document.addEventListener('DOMContentLoaded', function() {
     initChart();
     

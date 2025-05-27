@@ -1,4 +1,3 @@
-// Simulate real-time data updates
 setInterval(() => {
   const stats = document.querySelectorAll(".text-4xl.font-bold");
   stats.forEach((stat) => {

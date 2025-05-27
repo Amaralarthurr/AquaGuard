@@ -9,11 +9,7 @@
 
     </script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    
-    <!-- Chart.js para gráficos -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    
-    <!-- Leaflet para mapas -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     
@@ -21,10 +17,8 @@
     <link rel="stylesheet" href="./css/navigation.css">
 </head>
 <body class="bg-gradient-to-br from-slate-50 via-sky-50 to-blue-50 min-h-screen">
-    <!-- Barra de progresso de scroll -->
     <div class="scroll-progress bg-gradient-to-r from-ocean-blue via-water-blue to-teal" id="scroll-progress"></div>
     
-    <!-- Navigation -->
     <nav class="bg-white/90 backdrop-blur-md shadow-xl sticky top-0 z-50 border-b-4 border-gradient-to-r from-ocean-blue to-teal">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
@@ -73,18 +67,13 @@
         </div>
     </nav>
 
-    <!-- Hero Section with Video Background -->
     <section id="home" class="relative overflow-hidden min-h-screen flex items-center">
-        <!-- Video Background -->
         <video autoplay muted loop class="absolute inset-0 w-full h-full object-cover z-0">
             <source src="./videos/enchente_home_bg.mp4" type="video/mp4">
-            <!-- Fallback for browsers that don't support video -->
         </video>
         
-        <!-- Video Overlay -->
         <div class="absolute inset-0 bg-gradient-to-br from-deep-ocean/70 via-ocean-blue/60 to-teal/50 z-10"></div>
         
-        <!-- Content -->
         <div class="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
             <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-3xl p-12 shadow-2xl">
                 <h1 class="text-5xl md:text-7xl font-bold text-white mb-6">
@@ -103,7 +92,6 @@
                     </button>
                 </div>
                 
-                <!-- Floating Stats -->
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12">
                     <div class="bg-white/10 backdrop-blur-md border border-white/20 p-4 rounded-xl text-center">
                         <div class="text-2xl font-bold text-success-green" id="active-users">1,247</div>
@@ -126,7 +114,6 @@
         </div>
     </section>
 
-    <!-- Dashboard Section -->
     <section id="dashboard" class="py-20 bg-gradient-to-br from-slate-100 via-blue-50 to-sky-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
@@ -138,7 +125,6 @@
                 </p>
             </div>
 
-            <!-- Stats Cards -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
                 <div class="bg-gradient-to-br from-water-blue via-sky-blue to-light-blue p-8 rounded-3xl text-white hover:scale-105 transition-all duration-300 shadow-xl">
                     <div class="flex items-center justify-between">
@@ -185,9 +171,7 @@
                 </div>
             </div>
 
-            <!-- Charts and Maps -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <!-- Interactive Chart -->
                 <div class="bg-white/95 backdrop-blur-md p-8 rounded-3xl shadow-xl transition-all duration-300">
                     <div class="flex items-center justify-between mb-6">
                         <h3 class="text-2xl font-bold bg-gradient-to-r from-ocean-blue to-water-blue bg-clip-text text-transparent">
@@ -216,7 +200,6 @@
                     </div>
                 </div>
                 
-                <!-- Interactive Map -->
                 <div class="bg-white/95 backdrop-blur-md p-8 rounded-3xl shadow-xl transition-all duration-300">
                     <div class="flex items-center justify-between mb-6">
                         <h3 class="text-2xl font-bold bg-gradient-to-r from-teal to-success-green bg-clip-text text-transparent">
@@ -251,7 +234,6 @@
         </div>
     </section>
 
-    <!-- Community Data Collection -->
     <section id="community" class="py-20 bg-gradient-to-br from-slate-800 via-ocean-blue to-deep-ocean">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
@@ -263,7 +245,6 @@
                 </p>
             </div>
 
-            <!-- LGPD Consent -->
             <div class="bg-white/95 backdrop-blur-md rounded-3xl p-8 mb-8 shadow-xl transition-all duration-300">
                 <div class="flex items-start space-x-4 mb-6">
                     <div>
@@ -302,7 +283,6 @@
                 </div>
             </div>
 
-            <!-- Data Collection Form -->
             <div class="bg-white/95 backdrop-blur-md rounded-3xl p-8 shadow-xl transition-all duration-300">
                 <div class="text-center mb-8">
                     <h3 class="text-3xl font-bold bg-gradient-to-r from-ocean-blue to-teal bg-clip-text text-transparent mb-2">
@@ -374,7 +354,6 @@
         </div>
     </section>
 
-    <!-- Gamification Section -->
     <section id="gamification" class="py-20 bg-gradient-to-br from-sky-100 via-blue-50 to-slate-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
@@ -386,7 +365,6 @@
                 </p>
             </div>
 
-            <!-- User Profile Card -->
             <div class="bg-gradient-to-r from-ocean-blue via-water-blue to-teal rounded-3xl p-8 text-white mb-12 shadow-xl transition-all duration-300">
                 <div class="flex flex-col md:flex-row items-center justify-between">
                     <div class="flex items-center space-x-6 mb-6 md:mb-0">
@@ -414,7 +392,6 @@
                 </div>
             </div>
 
-            <!-- Badges -->
             <div class="mb-12">
                 <h3 class="text-3xl font-bold text-slate-800 mb-8 text-center">Suas Conquistas</h3>
                 <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
@@ -451,7 +428,6 @@
                 </div>
             </div>
 
-            <!-- Ranking and Quiz -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <div class="bg-white/95 backdrop-blur-md p-8 rounded-3xl shadow-xl transition-all duration-300">
                     <h3 class="text-2xl font-bold mb-6 bg-gradient-to-r from-warning-amber to-orange-500 bg-clip-text text-transparent">
@@ -496,16 +472,13 @@
                     </div>
                 </div>
 
-                <!-- Quiz Section -->
                 <div class="bg-gradient-to-br from-ocean-blue via-slate-700 to-deep-ocean p-8 rounded-3xl text-white shadow-xl transition-all duration-300">
                     <h3 class="text-2xl font-bold mb-6 flex items-center">
                         🧠 Quiz de Prevenção <span class="ml-2 bg-white/20 px-2 py-1 rounded-full text-sm" id="quiz-points">+100 pts</span>
                     </h3>
                     <p class="mb-6 text-slate-100 text-lg">Teste seus conhecimentos sobre prevenção de enchentes!</p>
 
-                    <!-- Quiz Container -->
                     <div id="quiz-container" class="bg-white/10 backdrop-blur-md p-6 rounded-2xl mb-6 border border-white/20">
-                        <!-- Quiz Progress -->
                         <div class="mb-4">
                             <div class="flex justify-between items-center mb-2">
                                 <span class="text-sm text-slate-200">Progresso</span>
@@ -516,18 +489,14 @@
                             </div>
                         </div>
                     
-                        <!-- Question Container -->
                         <div id="question-container">
                             <p class="font-bold mb-3 text-lg">Pergunta <span id="question-number">1</span>:</p>
                             <p class="text-slate-100 mb-4" id="question-text">Carregando pergunta...</p>
 
-                            <!-- Options Container -->
                             <div id="options-container" class="grid grid-cols-1 gap-3">
-                                <!-- Options will be inserted here -->
                             </div>
                         </div>
                     
-                        <!-- Result Container (hidden initially) -->
                         <div id="result-container" class="hidden text-center">
                             <div class="text-6xl mb-4" id="result-emoji">🎉</div>
                             <h4 class="text-2xl font-bold mb-2" id="result-title">Quiz Concluído!</h4>
@@ -549,7 +518,6 @@
                         </div>
                     </div>
 
-                    <!-- Quiz Controls -->
                     <div class="flex space-x-4" id="quiz-controls">
                         <button id="quiz-submit" class="flex-1 bg-white text-ocean-blue px-6 py-3 rounded-xl font-bold hover:scale-105 transition-all disabled:opacity-50 disabled:cursor-not-allowed" disabled>
                             🎯 Responder
@@ -559,7 +527,6 @@
                         </button>
                     </div>
                 
-                    <!-- Restart Button (hidden initially) -->
                     <div class="hidden" id="restart-container">
                         <button id="quiz-restart" class="w-full bg-gradient-to-r from-success-green to-teal text-white px-6 py-3 rounded-xl font-bold hover:scale-105 transition-all shadow-xl">
                             🔄 Fazer Quiz Novamente
@@ -570,7 +537,6 @@
         </div>
     </section>
 
-    <!-- About & IP Section -->
     <section id="about" class="py-20 bg-gradient-to-br from-deep-ocean via-slate-800 to-ocean-blue">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
@@ -579,7 +545,6 @@
                 </h2>
             </div>
 
-            <!-- Influencer Partnership -->
             <div class="bg-gradient-to-r from-ocean-blue via-water-blue to-teal rounded-3xl p-8 text-white shadow-xl hover:scale-105 transition-all duration-300">
                 <div class="text-center">
                     <h3 class="text-3xl font-bold mb-6"> Influenciadores Parceiros</h3>
@@ -614,7 +579,6 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="bg-gradient-to-br from-deep-ocean via-slate-900 to-black text-white py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -678,7 +642,6 @@
         </div>
     </footer>
 
-    <!-- Scripts -->
     <script src="./js/base.js"></script>
     <script src="./js/mobileMenu.js"></script>
     <script src="./js/form.js"></script>

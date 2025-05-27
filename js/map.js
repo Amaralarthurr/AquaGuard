@@ -4,15 +4,12 @@ let markersVisible = true;
 let riskMarkers = [];
 
 function initMap() {
-    // Inicializar mapa centrado em São Paulo
     riskMap = L.map('riskMap').setView([-23.5505, -46.6333], 11);
     
-    // Adicionar camada do mapa
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© OpenStreetMap contributors'
     }).addTo(riskMap);
     
-    // Dados simulados de áreas de risco
     const riskAreas = [
         { lat: -23.5505, lng: -46.6333, risk: 'alto', name: 'Centro - SP', reports: 15 },
         { lat: -23.5629, lng: -46.6544, risk: 'medio', name: 'Vila Madalena', reports: 8 },
@@ -26,7 +23,6 @@ function initMap() {
         { lat: -23.5405, lng: -46.6133, risk: 'medio', name: 'Tatuapé', reports: 7 }
     ];
     
-    // Adicionar marcadores
     riskAreas.forEach(area => {
         const color = getRiskColor(area.risk);
         const icon = L.divIcon({
@@ -53,7 +49,6 @@ function initMap() {
         riskMarkers.push(marker);
     });
     
-    // Adicionar círculos de área de influência
     riskAreas.forEach(area => {
         const color = getRiskColor(area.risk);
         L.circle([area.lat, area.lng], {
@@ -94,7 +89,6 @@ function toggleMarkers() {
 function centerMap() {
     riskMap.setView([-23.5505, -46.6333], 11);
     
-    // Feedback visual
     const button = document.getElementById('center-map');
     const originalText = button.innerHTML;
     button.innerHTML = '<i class="fas fa-check mr-1"></i>Centralizado!';
@@ -104,9 +98,7 @@ function centerMap() {
     }, 1500);
 }
 
-// Event Listeners
 document.addEventListener('DOMContentLoaded', function() {
-    // Aguardar um pouco para garantir que o DOM esteja pronto
     setTimeout(() => {
         initMap();
     }, 500);
