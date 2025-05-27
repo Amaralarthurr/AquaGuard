@@ -1,0 +1,147 @@
+/* Nova Paleta de Cores - Tema Água Profissional */
+:root {
+  /* Cores Primárias - Tons de Água */
+  --deep-ocean: #0f172a; /* Azul oceano profundo */
+  --ocean-blue: #1e40af; /* Azul oceano */
+  --water-blue: #3b82f6; /* Azul água */
+  --sky-blue: #60a5fa; /* Azul céu */
+  --light-blue: #93c5fd; /* Azul claro */
+
+  /* Cores Secundárias - Tons Aquáticos */
+  --teal-dark: #0f766e; /* Verde-azulado escuro */
+  --teal: #14b8a6; /* Verde-azulado */
+  --aqua: #06b6d4; /* Aqua */
+  --cyan: #22d3ee; /* Ciano */
+  --mint: #67e8f9; /* Menta */
+
+  /* Cores de Alerta - Profissionais */
+  --alert-red: #dc2626; /* Vermelho alerta */
+  --warning-amber: #f59e0b; /* Âmbar aviso */
+  --success-green: #059669; /* Verde sucesso */
+  --info-blue: #2563eb; /* Azul informação */
+
+  /* Cores Neutras - Elegantes */
+  --slate-50: #f8fafc;
+  --slate-100: #f1f5f9;
+  --slate-200: #e2e8f0;
+  --slate-300: #cbd5e1;
+  --slate-400: #94a3b8;
+  --slate-500: #64748b;
+  --slate-600: #475569;
+  --slate-700: #334155;
+  --slate-800: #1e293b;
+  --slate-900: #0f172a;
+
+  /* Gradientes Temáticos */
+  --gradient-ocean: linear-gradient(135deg, var(--deep-ocean), var(--ocean-blue));
+  --gradient-water: linear-gradient(135deg, var(--water-blue), var(--sky-blue));
+  --gradient-aqua: linear-gradient(135deg, var(--teal), var(--aqua));
+  --gradient-flow: linear-gradient(135deg, var(--ocean-blue), var(--teal), var(--aqua));
+  --gradient-alert: linear-gradient(135deg, var(--warning-amber), var(--alert-red));
+  --gradient-success: linear-gradient(135deg, var(--success-green), var(--teal));
+}
+
+/* Aplicação das Cores */
+.bg-water-gradient {
+  background: var(--gradient-water);
+}
+
+.bg-ocean-gradient {
+  background: var(--gradient-ocean);
+}
+
+.bg-aqua-gradient {
+  background: var(--gradient-aqua);
+}
+
+.bg-flow-gradient {
+  background: var(--gradient-flow);
+}
+
+.text-ocean {
+  color: var(--ocean-blue);
+}
+
+.text-water {
+  color: var(--water-blue);
+}
+
+.text-teal {
+  color: var(--teal);
+}
+
+.text-aqua {
+  color: var(--aqua);
+}
+
+/* Efeitos Glassmorphism Aprimorados */
+.glass-water {
+  background: rgba(59, 130, 246, 0.1);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+.glass-ocean {
+  background: rgba(30, 64, 175, 0.1);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(30, 64, 175, 0.2);
+}
+
+.glass-teal {
+  background: rgba(20, 184, 166, 0.1);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(20, 184, 166, 0.2);
+}
+
+/* Sombras Temáticas */
+.shadow-water {
+  box-shadow: 0 20px 25px -5px rgba(59, 130, 246, 0.1), 0 10px 10px -5px rgba(59, 130, 246, 0.04);
+}
+
+.shadow-ocean {
+  box-shadow: 0 20px 25px -5px rgba(30, 64, 175, 0.1), 0 10px 10px -5px rgba(30, 64, 175, 0.04);
+}
+
+.shadow-teal {
+  box-shadow: 0 20px 25px -5px rgba(20, 184, 166, 0.1), 0 10px 10px -5px rgba(20, 184, 166, 0.04);
+}
+
+/* Hover Effects */
+.hover-lift {
+  transition: all 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+/* Animações de Água */
+@keyframes wave {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.4);
+    opacity: 0;
+  }
+}
+
+.animate-wave {
+  animation: wave 3s ease-in-out infinite;
+}
+
+.animate-ripple {
+  animation: ripple 1s ease-out;
+}

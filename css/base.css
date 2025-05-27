@@ -1,171 +1,213 @@
-/* Configuração do Tailwind */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
-
+/* Base Styles - Tema Água Profissional */
 :root {
-    --electric-blue: #3b82f6;
-    --vibrant-purple: #7c3aed;
-    --vibrant-pink: #ec4899;
-    --vibrant-orange: #f97316;
-    --vibrant-teal: #14b8a6;
-    --lime-green: #84cc16;
-    --aqua-blue: #0891b2;
-    --aqua-dark: #0e7490;
-    --aqua-light: #67e8f9;
-    --safe-green: #059669;
-    --danger-red: #dc2626;
+  /* Nova Paleta de Cores - Tema Água */
+  --deep-ocean: #0f172a;
+  --ocean-blue: #1e40af;
+  --water-blue: #3b82f6;
+  --sky-blue: #60a5fa;
+  --light-blue: #93c5fd;
+  --teal-dark: #0f766e;
+  --teal: #14b8a6;
+  --aqua: #06b6d4;
+  --cyan: #22d3ee;
+  --mint: #67e8f9;
+  --alert-red: #dc2626;
+  --warning-amber: #f59e0b;
+  --success-green: #059669;
+  --info-blue: #2563eb;
 }
 
-* {
-    font-family: 'Inter', sans-serif;
+/* Animações de Água */
+@keyframes wave {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
-html{
-  scroll-behavior: smooth;
+@keyframes ripple {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.4);
+    opacity: 0;
+  }
 }
 
-.gradient-bg {
-    background: linear-gradient(-45deg, var(--electric-blue), var(--vibrant-purple), var(--vibrant-pink), var(--vibrant-orange), var(--vibrant-teal));
-    background-size: 400% 400%;
-    animation: gradient 8s ease infinite;
-}
-
-.video-overlay {
-    background: linear-gradient(135deg, rgba(59, 130, 246, 0.8), rgba(139, 92, 246, 0.6), rgba(236, 72, 153, 0.7));
-}
-
-.glass-effect {
-    backdrop-filter: blur(10px);
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.neon-glow {
-    box-shadow: 0 0 20px rgba(59, 130, 246, 0.5), 0 0 40px rgba(139, 92, 246, 0.3);
-}
-
-.card-hover {
-    transition: all 0.3s ease;
-}
-
-.card-hover:hover {
-    transform: translateY(-10px) scale(1.02);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-}
-
-/* Animações */
 @keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-20px); }
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  33% {
+    transform: translateY(-10px) rotate(1deg);
+  }
+  66% {
+    transform: translateY(5px) rotate(-1deg);
+  }
 }
 
-@keyframes gradient {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
+@keyframes flow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
-@keyframes pulse-slow {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.5; }
+/* Classes de Animação */
+.animate-wave {
+  animation: wave 3s ease-in-out infinite;
 }
 
-@keyframes bounce-slow {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-25%); }
+.animate-ripple {
+  animation: ripple 1s ease-out;
 }
 
 .animate-float {
-    animation: float 6s ease-in-out infinite;
+  animation: float 6s ease-in-out infinite;
 }
 
-.animate-pulse-slow {
-    animation: pulse-slow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+.animate-flow {
+  background-size: 200% 200%;
+  animation: flow 4s ease infinite;
+}
+
+/* Efeitos Glassmorphism */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.glass-water {
+  background: rgba(59, 130, 246, 0.1);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+.glass-ocean {
+  background: rgba(30, 64, 175, 0.1);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(30, 64, 175, 0.2);
+}
+
+.glass-teal {
+  background: rgba(20, 184, 166, 0.1);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(20, 184, 166, 0.2);
+}
+
+/* Efeitos de Hover */
+.card-hover {
+  transition: all 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+/* Gradientes Animados */
+.gradient-bg {
+  background: linear-gradient(-45deg, var(--deep-ocean), var(--ocean-blue), var(--water-blue), var(--teal));
+  background-size: 400% 400%;
+  animation: flow 15s ease infinite;
+}
+
+/* Efeitos de Neon */
+.neon-glow {
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.3), 0 0 40px rgba(59, 130, 246, 0.2), 0 0 60px rgba(59, 130, 246, 0.1);
+}
+
+.neon-glow:hover {
+  box-shadow: 0 0 30px rgba(59, 130, 246, 0.4), 0 0 60px rgba(59, 130, 246, 0.3), 0 0 90px rgba(59, 130, 246, 0.2);
+}
+
+/* Animações de Bounce Suaves */
+@keyframes bounce-slow {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes pulse-slow {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
 }
 
 .animate-bounce-slow {
-    animation: bounce-slow 3s infinite;
+  animation: bounce-slow 3s ease-in-out infinite;
 }
 
-/* Cores customizadas */
-.text-electric-blue { color: var(--electric-blue); }
-.text-vibrant-purple { color: var(--vibrant-purple); }
-.text-vibrant-pink { color: var(--vibrant-pink); }
-.text-vibrant-orange { color: var(--vibrant-orange); }
-.text-vibrant-teal { color: var(--vibrant-teal); }
-.text-lime-green { color: var(--lime-green); }
-.text-aqua-light { color: var(--aqua-light); }
-.text-safe-green { color: var(--safe-green); }
-.text-danger-red { color: var(--danger-red); }
-
-/* Estilos para o mapa */
-.leaflet-container {
-    border-radius: 1rem;
+.animate-pulse-slow {
+  animation: pulse-slow 2s ease-in-out infinite;
 }
 
-/* Estilos para o gráfico */
-#precipitationChart {
-    max-height: 256px;
+/* Overlay de Vídeo */
+.video-overlay {
+  background: linear-gradient(
+    135deg,
+    rgba(15, 23, 42, 0.8) 0%,
+    rgba(30, 64, 175, 0.6) 50%,
+    rgba(20, 184, 166, 0.4) 100%
+  );
 }
 
 /* Responsividade */
 @media (max-width: 768px) {
-    .glass-effect {
-        padding: 2rem;
-    }
-    
-    .neon-glow {
-        box-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
-    }
+  .card-hover:hover {
+    transform: translateY(-4px) scale(1.01);
+  }
+
+  .neon-glow {
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.2);
+  }
 }
 
-/* Estilos para navegação suave */
-
-/* Classe para links ativos */
-.nav-active {
-    color: var(--electric-blue) !important;
-    font-weight: 700;
-    transform: scale(1.05);
-    text-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+/* Scrollbar Personalizada */
+::-webkit-scrollbar {
+  width: 8px;
 }
 
-/* Highlight de seção */
-.section-highlight {
-    animation: sectionPulse 2s ease-in-out;
+::-webkit-scrollbar-track {
+  background: var(--deep-ocean);
 }
 
-@keyframes sectionPulse {
-    0%, 100% { 
-        box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4);
-    }
-    50% { 
-        box-shadow: 0 0 0 20px rgba(59, 130, 246, 0);
-    }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--ocean-blue), var(--teal));
+  border-radius: 4px;
 }
 
-/* Offset para navegação fixa */
-section[id] {
-    scroll-margin-top: 80px;
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(var(--water-blue), var(--aqua));
 }
 
-/* Indicador de progresso de scroll */
-.scroll-progress {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 0%;
-    height: 4px;
-    background: linear-gradient(90deg, var(--electric-blue), var(--vibrant-purple), var(--vibrant-pink));
-    z-index: 9999;
-    transition: width 0.3s ease;
+/* Seleção de Texto */
+::selection {
+  background: var(--water-blue);
+  color: white;
 }
 
-/* Responsividade */
-@media (max-width: 768px) {
-    .nav-active {
-        transform: scale(1.02);
-    }
-    
-    section[id] {
-        scroll-margin-top: 70px;
-    }
-
+::-moz-selection {
+  background: var(--water-blue);
+  color: white;
 }
