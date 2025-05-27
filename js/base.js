@@ -2,7 +2,6 @@
             theme: {
                 extend: {
                     colors: {
-                        // Nova Paleta - Tema Água Profissional
                         'deep-ocean': '#0f172a',
                         'ocean-blue': '#1e40af',
                         'water-blue': '#3b82f6',
