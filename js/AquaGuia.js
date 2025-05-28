@@ -414,25 +414,52 @@
             }
         }
 
-        // Inicializar quando a página carregar
-        window.addEventListener('load', function() {
-            // Aguardar um pouco para garantir que tudo carregou
-            setTimeout(() => {
-                initGuide3D();
-                setupGuideInteractions();
-                
-                // Mostrar tooltip inicial após 3 segundos
-                setTimeout(() => {
-                    const tooltip = document.getElementById('guideTooltip');
-                    tooltip.classList.add('show');
-                    
-                    // Esconder após 5 segundos
-                    setTimeout(() => {
-                        tooltip.classList.remove('show');
-                    }, 5000);
-                }, 3000);
-            }, 1000);
-        });
+// Inicializar quando a página carregar
+window.addEventListener('load', function() {
+    // Aguardar um pouco para garantir que tudo carregou
+    setTimeout(() => {
+        initGuide3D();
+        setupGuideInteractions();
+        
+        // Mostrar mensagem de boas-vindas automática após 3 segundos
+        setTimeout(() => {
+            showWelcomeMessage();
+        }, 3000);
+    }, 1000);
+});
+
+// Função para mostrar mensagem de boas-vindas
+function showWelcomeMessage() {
+    const speech = document.getElementById('guideSpeech');
+    const content = document.getElementById('guideSpeechContent');
+    const closeBtn = document.getElementById('guideSpeechClose');
+    
+    // Conteúdo da mensagem de boas-vindas
+    const welcomeMessage = `
+        <strong>🌊 Olá! Bem-vindo ao AquaGuard!</strong><br><br>
+        Eu sou o <strong>AquaGuia</strong>, seu assistente virtual! <br><br>
+        Estou aqui para te ajudar a navegar pelo site e descobrir todas as funcionalidades incríveis da nossa plataforma de prevenção de enchentes.<br><br>
+        <strong>Clique em mim</strong> a qualquer momento para abrir o menu de navegação e explorar as diferentes seções!
+    `;
+    
+    content.innerHTML = welcomeMessage;
+    closeBtn.textContent = 'Entendi!';
+    
+    // Mostrar o balão de fala
+    speech.classList.add('show');
+    
+    // Adicionar efeito de destaque no guia
+    const guide = document.getElementById('guide3D');
+    guide.style.animation = 'pulse 2s infinite';
+    
+    
+    // Permitir fechar manualmente
+    closeBtn.onclick = function() {
+        clearTimeout(welcomeTimeout);
+        hideSpeech();
+        guide.style.animation = '';
+    };
+}
 
         // Event listener para redimensionamento
         window.addEventListener('resize', handleResize);
