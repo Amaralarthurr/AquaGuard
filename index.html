@@ -6,15 +6,41 @@
     <title>AquaGuard - Prevenção Inteligente de Enchentes</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'ocean-blue': '#1e40af',
+                        'water-blue': '#3b82f6',
+                        'deep-ocean': '#1e3a8a',
+                        'teal': '#14b8a6',
+                        'success-green': '#10b981',
+                        'warning-amber': '#f59e0b',
+                        'alert-red': '#ef4444',
+                        'sky-blue': '#0ea5e9',
+                        'aqua': '#06b6d4',
+                        'cyan': '#22d3ee',
+                        'mint': '#6ee7b7',
+                        'light-blue': '#7dd3fc',
+                        'info-blue': '#3b82f6'
+                    }
+                }
+            }
+        }
     </script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     
+    <!-- Three.js Dependencies -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+    
     <link rel="stylesheet" href="./css/base.css">
     <link rel="stylesheet" href="./css/navigation.css">
+    <link rel="stylesheet" href="./css/aquaGuiaStyles.css">
+
 </head>
 <body class="bg-gradient-to-br from-slate-50 via-sky-50 to-blue-50 min-h-screen">
     <div class="scroll-progress bg-gradient-to-r from-ocean-blue via-water-blue to-teal" id="scroll-progress"></div>
@@ -642,6 +668,97 @@
         </div>
     </footer>
 
+    <!-- AquaGuia Lateral -->
+    <div id="guide3D">
+        <div class="guide-pulse"></div>
+        <div class="guide-tooltip" id="guideTooltip">
+            👋 Olá! Eu sou o AquaGuia! Clique em mim para obter ajuda e dicas sobre o site.
+        </div>
+    </div>
+
+    <!-- Menu Lateral do AquaGuia -->
+    <div id="guideMenu" class="guide-menu">
+        <div class="guide-menu-header">
+            <button id="guideMenuClose" class="guide-menu-close">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="flex items-center justify-center mb-3">
+                <div>
+                    <h3 class="text-xl font-bold">AquaGuia</h3>
+                    <p class="text-sm opacity-80">Seu assistente virtual</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="guide-menu-content">
+            <div class="guide-menu-item" data-section="home">
+                <div class="guide-menu-item-icon">
+                    <i class="fas fa-home"></i>
+                </div>
+                <div class="guide-menu-item-content">
+                    <h4>Início</h4>
+                    <p>Página principal do AquaGuard</p>
+                </div>
+            </div>
+            
+            <div class="guide-menu-item" data-section="dashboard">
+                <div class="guide-menu-item-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="guide-menu-item-content">
+                    <h4>Dashboard</h4>
+                    <p>Dados em tempo real sobre enchentes</p>
+                </div>
+            </div>
+            
+            <div class="guide-menu-item" data-section="community">
+                <div class="guide-menu-item-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="guide-menu-item-content">
+                    <h4>Comunidade</h4>
+                    <p>Contribua com relatos da sua região</p>
+                </div>
+            </div>
+            
+            <div class="guide-menu-item" data-section="gamification">
+                <div class="guide-menu-item-icon">
+                    <i class="fas fa-trophy"></i>
+                </div>
+                <div class="guide-menu-item-content">
+                    <h4>Ranking</h4>
+                    <p>Sistema de recompensas e conquistas</p>
+                </div>
+            </div>
+            
+            <div class="guide-menu-item" data-section="about">
+                <div class="guide-menu-item-icon">
+                    <i class="fas fa-info-circle"></i>
+                </div>
+                <div class="guide-menu-item-content">
+                    <h4>Sobre</h4>
+                    <p>Conheça nossas parcerias</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="guideOverlay" class="guide-overlay"></div>
+
+    <div id="guideSpeech" class="guide-speech">
+        <div id="guideSpeechContent" class="guide-speech-content">
+            Olá! Eu sou o AquaGuia, seu assistente virtual!
+        </div>
+        <div class="guide-speech-actions">
+            <button id="guideSpeechClose" class="guide-speech-btn secondary">
+                Entendi
+            </button>
+            <button id="guideSpeechNext" class="guide-speech-btn primary" style="display: none;">
+                Continuar
+            </button>
+        </div>
+    </div>
+
     <script src="./js/base.js"></script>
     <script src="./js/mobileMenu.js"></script>
     <script src="./js/form.js"></script>
@@ -651,6 +768,7 @@
     <script src="./js/map.js"></script>
     <script src="./js/quiz.js"></script>
     <script src="./js/scrollProgress.js"></script>
-    
+    <script src="./js/AquaGuia.js"></script>
+
 </body>
 </html>
